@@ -1,0 +1,175 @@
+{extend name="layouts@base" /}
+{block name="head"}
+<style type="text/css">
+html, body, form, fieldset, input, p, img, ul, ol, li, dl, dt, dd, h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0;
+}
+img, fieldset {
+    border: none;
+}
+body {
+    background: #fff;
+    font-size: 12px;
+    font-family: arial;
+    min-height: 512px;
+    min-width: 1000px;
+    position: relative;
+  height: 100%;
+}
+#main {
+    clear: both;
+    margin: 0 auto;
+    padding-bottom: 75px;
+    width: 900px;
+    margin-top: 20%;
+     min-height: 100%;
+}
+#main .has-jinju {
+    margin-bottom: 30px;
+}
+#bd_search {
+    margin-bottom: 70px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    -webkit-transition: margin-bottom .4s;
+    transition: margin-bottom .4s;
+    width: 640px;
+    _z-index: 1;
+    z-index: 2001;
+}
+#input-container {
+    background: #fff;
+    position: relative;
+    width: 640px;
+    z-index: 9;
+}
+.skin-text {
+    font-size: 18px;
+    margin-bottom: 30px;
+    max-height: 40px;
+    text-align: center;
+}
+#suggest-align {
+    height: 34px;
+    padding: 5px 10px;
+    position: relative;
+    vertical-align: top;
+    width: 519px;
+}
+.skin-search-input {
+    border: 1px solid #bbb;
+}
+#input.lowie-bg {
+    filter: alpha(opacity=10);
+}
+#input, #search-button {
+    outline: none;
+    position: absolute;
+}
+#input {
+    *background: transparent;
+    background: rgba(0,0,0,.001);
+    border: none;
+    color: #333;
+    float: left;
+    font-size: 16px;
+    height: 30px;
+    left: 10px;
+    line-height: 30px;
+    margin-top: 3px;
+    top: 5px;
+    width: 519px;
+}
+#search-button {
+    -webkit-appearance: none;
+    border: 0;
+    border-radius: 0;
+    cursor: pointer;
+    font-family: "Microsoft YaHei";
+    font-size: 18px;
+    height: 46px;
+    left: 540px;
+    letter-spacing: 1px;
+    top: 0;
+    vertical-align: top;
+    width: 100px;
+}
+#input, #search-button {
+    outline: none;
+    position: absolute;
+}
+.skin-search-button {
+    background: #5e6664;
+    color: #fff;
+}
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+</style>
+{/block}
+{block name="main" }
+  <!-- main -->
+  <div class="main-news">
+    <div class="layui-container">
+      <div id="main">
+        <section id="bd_search" class="has-jinju" style="height: 46px;">
+          <div class="fixed">
+              <fieldset id="input-container" class="">
+                  <div id="suggest-align" class="skin-search-input">
+                    <input type="text" name="q" class="placeholder lowie-bg" id="input"  placeholder="请输入您需要缩短的网址" suggestwidth="540px" autocomplete="off">
+                  </div>
+                  <input type="submit" id="search-button" class="skin-search-button" value="缩短">
+              </fieldset>
+          </div>
+        </section>
+        <div class="urlshow" style="display: none"> 
+          <p class="skin-text">生成的短链接<span style="font-size: 14px;">(点击可复制)</span></p>
+          <p class="ad-wrap skin-text" id="copyMsg" data-clipboard-target="#copyMsg" onclick="CopyText()"></p>
+        </div>
+      </div>
+    </div>
+</div>
+<script type="text/javascript" src="/static/js/jquery/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript" src="/static/js/clipboard.min.js"></script>
+<script type="text/javascript">
+  $(function (){
+    var fd = new FormData();
+    $("#search-button").click(function (){
+      var url = $("#input").val();
+      fd.append("url",url);
+      $.ajax({
+        url: '/home/url/shortUrl',
+        type: 'post',
+        processData: false,
+        contentType: false,
+        data: fd,
+        success: function (res) {
+          if(res.code == 1){
+            $(".urlshow").show();
+            $(".ad-wrap").html(res.data);
+          }else{
+            $(".urlshow").hide();
+            alert(res.msg);
+          }
+        }
+    })
+    })
+  })
+  function CopyText() {
+        let clipboard = new Clipboard('.ad-wrap'); //注意要使用let或者const，不能使用var，否则会出现复制次数叠加的问题，即复制不止一次。
+        //因为var是全局变量，let和const是局部
+        clipboard.on('success', e => {
+            alert( '复制成功提示,已成功复制到剪切板，');
+            clipboard.destroy();//使用destroy可以清楚缓存
+        });
+        clipboard.on('error', e => {
+            alert( '操作失败提示复制失败,请稍后重试！');
+            clipboard.destroy();
+        });
+    }
+</script>
+ {/block}

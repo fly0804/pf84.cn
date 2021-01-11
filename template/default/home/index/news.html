@@ -1,0 +1,30 @@
+{extend name="layouts@base" /}
+{block name="main" }
+  <!-- banner部分 -->
+  <div class="banner news">
+    <div class="title active">
+      <p>实时新闻</p>
+      <p class="en">Real-time News</p>
+    </div>
+  </div>
+  <!-- main -->
+  <div class="main-news">
+    <div class="layui-container">
+      <div class="layui-row layui-col-space20">
+      	{volist name="list" id="vo" }
+        <div class="layui-col-lg6 content" style="height: 150px;">
+          <div>
+            <div class="news-img"><img src="{$vo.imgsrc}"></div><div class="news-panel">
+              <strong>{$vo.title}</strong>
+              <p class="detail"><span>{$vo.digest}</span></p>
+              <p class="read-push">阅读 <span>{$vo.priority}</span>&nbsp;&nbsp;&nbsp;&nbsp;发布时间：<span>{$vo.ptime}</span></p>
+            </div>
+          </div>
+        </div>
+        {/volist}
+      
+      </div>
+      <!--<div id="newsPage"><div class="layui-box layui-laypage layui-laypage-molv" id="layui-laypage-1"><span class="layui-laypage-curr"><em class="layui-laypage-em" style="background-color:#2db5a3;"></em><em>1</em></span><a href="javascript:;" data-page="2">2</a><a href="javascript:;" data-page="3">3</a><a href="javascript:;" data-page="4">4</a><a href="javascript:;" data-page="5">5</a><a href="javascript:;" class="layui-laypage-next" data-page="2">下一页</a></div></div>-->
+    </div>
+  </div>
+   {/block}

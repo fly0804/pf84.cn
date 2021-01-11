@@ -1,0 +1,110 @@
+{extend name="layouts@base" /}
+{block name="main" }
+  <!-- banner部分 -->
+  <div>
+    <div class="layui-carousel" id="banner" lay-anim="" lay-indicator="inside" lay-arrow="always" style="width: 100%; height: 898px;">
+      <div carousel-item="">
+        <div class="layui-this">
+          <img src="/static/home/static/img/banner1.jpg">
+          <div class="panel" style="width: 480px;">
+            <p class="title" style="color: #333;">{$setting.shop_title}</p>
+            <p>提供技术解决方案</p>
+          </div>
+        </div>
+        <div class="">
+          <img src="/static/home/static/img/banner2.jpg">
+          <div class="panel" style="width: 480px;">
+            <p class="title" style="color: #333;">{$setting.shop_title}</p>
+            <p>提供完美前端体验</p>
+          </div>
+        </div>
+      </div>
+    <div class="layui-carousel-ind"><ul><li class="layui-this"></li><li class=""></li></ul></div><button class="layui-icon layui-carousel-arrow" lay-type="sub"></button><button class="layui-icon layui-carousel-arrow" lay-type="add"></button></div>
+  </div>
+  <!-- main部分 -->
+  <div class="main-product">
+    <div class="layui-container">
+      <p class="title">专为前端而研制的<span>核心产品</span></p>
+      <div class="layui-row layui-col-space25">
+        <div class="layui-col-sm6 layui-col-md3">
+          <div class="content">
+            <div><img src="/static/home/static/img/Big_icon1.png"></div>
+            <div>
+              <p class="label">JS基础库</p>
+              <p>从小屏逐步扩展到大屏，最终实现所有屏幕适配，适应移动互联潮流。</p>
+            </div>
+            <!-- <a href="javascript:;">查看产品 &gt;</a> -->
+          </div>
+        </div>
+        <div class="layui-col-sm6 layui-col-md3 ">
+          <div class="content">
+            <div><img src="/static/home/static/img/Big_icon2.png"></div>
+            <div>
+              <p class="label">CSS处理</p>
+              <p>从小屏逐步扩展到大屏，最终实现所有屏幕适配，适应移动互联潮流。</p>
+            </div>
+            <!-- <a href="javascript:;">查看产品 &gt;</a> -->
+          </div>
+        </div>
+        <div class="layui-col-sm6 layui-col-md3 ">
+          <div class="content">
+            <div><img src="/static/home/static/img/Big_icon3.png"></div>
+            <div>
+              <p class="label">兼容性</p>
+              <p>从小屏逐步扩展到大屏，最终实现所有屏幕适配，适应移动互联潮流。</p>
+            </div>
+            <!-- <a href="javascript:;">查看产品 &gt;</a> -->
+          </div>
+        </div>
+        <div class="layui-col-sm6 layui-col-md3 ">
+          <div class="content">
+            <div><img src="/static/home/static/img/Big_icon4.png"></div>
+            <div>
+              <p class="label">响应式</p>
+              <p>从小屏逐步扩展到大屏，最终实现所有屏幕适配，适应移动互联潮流。</p>
+            </div>
+            <!-- <a href="javascript:;">查看产品 &gt;</a> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="main-service">
+    <div class="layui-container">
+      <p class="title">为客户打造完美的<span>专业服务</span></p>
+      <div class="layui-row layui-col-space25 layui-col-space80">
+        <div class="layui-col-sm6">
+          <div class="content">
+            <div class="content-left"><img src="/static/home/static/img/home_img1.jpg"></div>
+            <div class="content-right">
+              <p class="label">1 对 1 前端指导</p>
+              <span></span>
+              <p>更有多个包含不同主题的Web组件，可快速构建界面出色、体验优秀的跨屏页面，大幅提升开发效率。</p>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="layui-col-sm6">
+          <div class="content">
+            <div class="content-left"><img src="/static/home/static/img/home_img3.jpg"></div>
+            <div class="content-right">
+              <p class="label">1 对 1 技术指导</p>
+              <span></span>
+              <p>更有多个包含不同主题的Web组件，可快速构建界面出色、体验优秀的跨屏页面，大幅提升开发效率。</p>
+            </div>
+          </div>
+        </div> -->
+        <div class="layui-col-sm6">
+          <div class="content">
+            <div class="content-left"><img src="/static/home/static/img/home_img4.jpg"></div>
+            <div class="content-right">
+              <p class="label">技术需求方案制定</p>
+              <span></span>
+              <p>专业出版，根据客户业务需求制定技术需求方案的能力</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--<div class="service-more"><a href="index.html">查看更多</a></div>-->
+    </div>
+  </div>
+ {/block}

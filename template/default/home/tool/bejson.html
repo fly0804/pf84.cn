@@ -1,0 +1,174 @@
+{extend name="layouts@base" /}
+{block name="head"}
+<style type="text/css">
+html, body, form, fieldset, input, p, img, ul, ol, li, dl, dt, dd, h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0;
+}
+img, fieldset {
+    border: none;
+}
+body {
+    background: #fff;
+    font-size: 12px;
+    font-family: arial;
+    min-height: 512px;
+    min-width: 1000px;
+    position: relative;
+  height: 100%;
+}
+#main {
+    clear: both;
+    margin: 0 auto;
+    padding-bottom: 75px;
+    width: 900px;
+    margin-top: 5%;
+     min-height: 100%;
+}
+#main .has-jinju {
+    margin-bottom: 30px;
+}
+#bd_search {
+    margin-bottom: 70px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    -webkit-transition: margin-bottom .4s;
+    transition: margin-bottom .4s;
+    width: 640px;
+    _z-index: 1;
+    z-index: 2001;
+}
+#input-container {
+    background: #fff;
+    position: relative;
+    width: 640px;
+    z-index: 9;
+}
+.skin-text {
+    font-size: 18px;
+    margin-bottom: 30px;
+    max-height: 40px;
+    text-align: center;
+}
+#suggest-align {
+    height: 500px;
+    padding: 5px 10px;
+    position: relative;
+    vertical-align: top;
+    width: 100%;
+}
+.skin-search-input {
+    border: 1px solid #bbb;
+}
+#input.lowie-bg {
+    filter: alpha(opacity=10);
+}
+#input, #search-button {
+    outline: none;
+    position: absolute;
+}
+#input {
+    *background: transparent;
+    background: rgba(0,0,0,.001);
+    border: none;
+    color: #333;
+    float: left;
+    font-size: 16px;
+    height: 500px;
+    left: 10px;
+    line-height: 30px;
+    top: 5px;
+    width: 100%;
+}
+#search-button {
+    -webkit-appearance: none;
+    border: 0;
+    border-radius: 0;
+    cursor: pointer;
+    font-family: "Microsoft YaHei";
+    font-size: 18px;
+    height: 46px;
+    left: 50%;
+    letter-spacing: 1px;
+    vertical-align: top;
+    width: 100px;
+}
+#input, #search-button {
+    outline: none;
+    position: absolute;
+}
+.skin-search-button {
+    background: #5e6664;
+    color: #fff;
+}
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+</style>
+{/block}
+{block name="main" }
+  <!-- main -->
+  <div class="main-news">
+    <div class="layui-container">
+      <div id="main">
+        <section id="bd_search" class="has-jinju" style="height: 46px;">
+          <div class="fixed">
+              <fieldset id="input-container" class="">
+                  <div id="suggest-align" class="skin-search-input">
+                    <textarea type="text" name="q" class="placeholder lowie-bg" id="input"  placeholder="请输入您格式化的json字符串" suggestwidth="540px" autocomplete="off"></textarea>
+                  </div>
+                  <br />
+                  <input type="submit" id="search-button" class="skin-search-button" value="格式化">
+              </fieldset>
+          </div>
+        </section>
+        <div class="jsonshow"> 
+        </div>
+      </div>
+    </div>
+</div>
+<script type="text/javascript" src="/static/js/jquery/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript" src="/static/js/clipboard.min.js"></script>
+<script type="text/javascript">
+  $(function (){
+    $("#search-button").click(function (){
+      var text_value = $("#input").val();
+  　　if(text_value == ""){
+     　　alert("不能为空");  
+     　　return false;
+  　　} else {
+          text_value = eval("'" + text_value + "'");
+          //text_value = unescape(text_value.replace(/\u/g, "%u"))
+          var res="";
+          for(var i=0,j=0,k=0,ii,ele;i<text_value.length;i++)
+          {
+              ele=text_value.charAt(i);
+              if(j%2==0&&ele=="}")
+              {
+                  k--;                
+                  for(ii=0;ii<k;ii++) ele="    "+ele;
+                  ele="\n"+ele;
+              }
+              else if(j%2==0&&ele=="{")
+              {
+                  ele+="\n";
+                  k++;          
+                  for(ii=0;ii<k;ii++) ele+="    ";
+              }
+              else if(j%2==0&&ele==",")
+              {
+                  ele+="\n";
+                  for(ii=0;ii<k;ii++) ele+="    ";
+              }
+              else if(ele=="\"") j++;
+              res+=ele;        
+          }
+          $("#input").val(res) 
+  　　}
+    })
+  })
+</script>
+ {/block}
